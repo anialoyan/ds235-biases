@@ -1,48 +1,183 @@
-# Bias Exploration in Diffusion-Based Image Generation
+# **Bias Exploration in Diffusion-Based Image Generation**
 
-This project investigates how different text-to-image diffusion models respond to prompts that may reflect social, demographic, or cultural biases. We generate images using three distinct models and analyze the resulting content using CLIP-based similarity scoring, VQA models, and manually constructed bias proposals.
-
----
-
-## 📘 Notebooks
-Some of the models require an access token from Huggingface, generate your own or view the results from colab notebooks
-### 1. DeepFloyd IF (Pixel-based Diffusion)
-- **Colab Link:** [Open Notebook](https://colab.research.google.com/drive/1RpppnTMrCuV8gPA6EGw7IQM5PSfNInZ-?usp=sharing)
-
-### 2. Stable Diffusion XL (Latent Diffusion)
-- **Colab Link:** [Open Notebook](https://colab.research.google.com/drive/1kO3pe9N4gASzcNRf22jKwWT2dJ5pzpYR?usp=sharing)
-
-### 3. Flux1 Diffusion Model
-- **Colab Link:** [Open Notebook](https://colab.research.google.com/drive/1ae_vu7qlX45QzrO4LvsDKWBJAZK3ei3V?usp=sharing)
+This project investigates how different text-to-image diffusion models respond to prompts that may reflect social, demographic, or cultural biases. We generate images using three distinct models and analyze the resulting content using CLIP-based similarity scoring, Visual Question Answering (VQA) models, and manually constructed bias proposals. The goal of this project is to explore and analyze the potential biases within generative models that create images from text.
 
 ---
 
-## 🖼️ Generated Images
+## **Project Overview**
 
-### 🔹 DeepFloyd Outputs
-- [Google Drive Folder](https://drive.google.com/drive/folders/18I4fOPDlQmisirztl5NLqXnHcucEAwcz?usp=sharing)
+Text-to-image generation models have achieved significant advances in producing high-quality, diverse images from textual descriptions. However, like many AI systems, these models can inherit and perpetuate social, cultural, and demographic biases. This project evaluates and compares three different diffusion models to assess how they generate images from biased prompts and identify potential issues in their outputs.
 
-### 🔹 SDXL Outputs
-- [Google Drive Folder](https://drive.google.com/drive/folders/1-IuYMdVSpJSOEQ3W9YVNe3x8dfLqNQ4b?usp=sharing)
+The three models evaluated in this project include:
+- **DeepFloyd IF (Pixel-based Diffusion)**
+- **Stable Diffusion XL (Latent Diffusion)**
+- **Flux1 Diffusion Model**
 
-### 🔹 Flux1 Outputs
-- [Google Drive Folder](https://drive.google.com/drive/folders/1j3SRyMIJa66gr_BJKThujwpmWzL7zXmz?usp=sharing)
-
-
+Each of these models has its strengths and limitations, and the analysis aims to explore how each model handles biases related to different attributes such as race, gender, and age.
 
 ---
 
-## Bias Proposal Data
+## **High-Level Summary of Selected Methods**
+
+### 1. **DeepFloyd IF (Pixel-based Diffusion)**
+- **Description:** DeepFloyd IF is a pixel-based diffusion model that generates high-resolution images by working directly in pixel space. Unlike latent models, which operate on compressed image representations, DeepFloyd operates on the image itself, allowing for finer details in the generated images.
+- **Justification for Inclusion:** This model is particularly useful when high-quality, fine-grained details are required in image generation, making it ideal for exploring the subtle effects of biases in image content.
+
+[Open DeepFloyd IF Notebook](https://colab.research.google.com/drive/1RpppnTMrCuV8gPA6EGw7IQM5PSfNInZ-?usp=sharing)
+
+### 2. **Stable Diffusion XL (Latent Diffusion)**
+- **Description:** Stable Diffusion XL utilizes latent diffusion, which operates on a lower-dimensional, compressed representation of images. This approach speeds up the generation process while maintaining a balance between image quality and computational efficiency.
+- **Justification for Inclusion:** Stable Diffusion XL is a widely-used model known for producing high-quality outputs with lower computational cost. It’s a great choice for exploring potential biases in larger-scale, more generalizable models.
+
+[Open Stable Diffusion XL Notebook](https://colab.research.google.com/drive/1kO3pe9N4gASzcNRf22jKwWT2dJ5pzpYR?usp=sharing)
+
+### 3. **Flux1 Diffusion Model**
+- **Description:** Flux1 is another diffusion model that focuses on iterative refinement, improving its image outputs over multiple passes. The model's ability to gradually improve its predictions makes it well-suited for handling complex prompts and generating diverse images.
+- **Justification for Inclusion:** Flux1 offers flexibility in generating a wide variety of images with differing details, which is essential for testing how the model handles various types of biased prompts.
+
+[Open Flux1 Diffusion Model Notebook](https://colab.research.google.com/drive/1ae_vu7qlX45QzrO4LvsDKWBJAZK3ei3V?usp=sharing)
+
+---
+
+## **Generated Images**
+
+This section contains links to the generated images from each of the models above. These images were generated from a variety of prompts, some of which were carefully designed to assess model bias.
+
+### 🔹 **DeepFloyd Outputs**
+- [View DeepFloyd IF Generated Images](https://drive.google.com/drive/folders/18I4fOPDlQmisirztl5NLqXnHcucEAwcz?usp=sharing)
+
+### 🔹 **SDXL Outputs**
+- [View Stable Diffusion XL Generated Images](https://drive.google.com/drive/folders/1-IuYMdVSpJSOEQ3W9YVNe3x8dfLqNQ4b?usp=sharing)
+
+### 🔹 **Flux1 Outputs**
+- [View Flux1 Generated Images](https://drive.google.com/drive/folders/1j3SRyMIJa66gr_BJKThujwpmWzL7zXmz?usp=sharing)
+
+---
+
+## **Bias Proposal Data**
+
+Bias proposals were generated using Falcon LLM and focus on identifying key biases in the generated images. The file containing these proposals is linked below:
 
 - **Generated by:** Falcon LLM
 - **File:** `image_bias_proposals.json`
-- [Download from Google Drive](https://drive.google.com/file/d/1ovUwfWGpYQxU1_VDbT-g9xnY8TmMhSKt/view?usp=drive_link)
+- [Download Bias Proposal Data](https://drive.google.com/file/d/1ovUwfWGpYQxU1_VDbT-g9xnY8TmMhSKt/view?usp=drive_link)
 
 ---
 
-##  Analysis Overview
+## **Analysis Overview**
 
-- Image-text similarity was scored using CLIP (ViT-B/32).
-- VQA-style questions were asked based on structured class options per prompt.
-- The dominant predicted class (based on CLIP score) was used to analyze distribution and potential bias.
-- Plots were generated showing frequency distributions of class predictions per prompt.
+The analysis performed on the images generated by these models included the following steps:
+
+1. **Image-text similarity scoring:** This was carried out using CLIP (ViT-B/32) to assess how well the generated image aligns with the given text prompt. The CLIP model was used to measure the semantic similarity between text and image.
+   
+2. **VQA-style questions:** Structured class-based questions were generated for each prompt. These questions aimed to assess how well the model responds to structured queries about the generated image (e.g., identifying objects, actions, and settings).
+   
+3. **Bias Analysis:** The dominant predicted class for each image (based on CLIP score) was analyzed to detect patterns of bias across the prompts. Visualizations were created to show how the distribution of class predictions varied by prompt and model.
+
+4. **Frequency distributions:** Plots showing the frequency distributions of class predictions for each prompt were generated to identify any biases in the model’s responses.
+
+---
+
+## **Installation Instructions**
+
+Since this project relies on Jupyter Notebooks, dependencies should be installed directly within the notebooks themselves. Here are the instructions for running the notebooks:
+
+### 1. **Clone the Repository (Optional)**
+
+If you'd like to work on this project locally, start by cloning the repository:
+
+```bash
+git clone https://github.com/your-username/diffusion-image-generation.git
+cd diffusion-image-generation
+```
+### 2. **Install Dependencies in Colab**
+
+In each of the provided Colab notebooks, you will find the following lines to install the required libraries:
+
+```python
+!pip install torch torchvision transformers diffusers opencv-python
+```
+
+This will install the necessary dependencies including PyTorch, Transformers, Diffusers, and OpenCV, all of which are required to run the notebooks.
+
+For GPU acceleration, you may also need to install the appropriate CUDA version for PyTorch. For more details, refer to [PyTorch Installation](https://pytorch.org/get-started/locally/).
+
+### 3. **Obtain Huggingface API Key (If Required)**
+
+Some models in the notebooks require an access token from Huggingface. If you haven’t already, sign up at [Huggingface](https://huggingface.co/) and generate an API token. You can store the token in a `.env` file if working locally or authenticate directly in the notebook with:
+
+```python
+from huggingface_hub import login
+login(token="your_token_here")
+```
+
+## **Running the Notebooks**
+
+Once you've set up the dependencies and authentication, you can begin running the notebooks.
+
+### 1. **Running the Notebooks in Google Colab**
+
+To run the notebooks in Google Colab, simply click on the provided notebook links:
+
+- **DeepFloyd IF (Pixel-based Diffusion):** [Open Notebook](https://colab.research.google.com/drive/1RpppnTMrCuV8gPA6EGw7IQM5PSfNInZ-?usp=sharing)
+- **Stable Diffusion XL (Latent Diffusion):** [Open Notebook](https://colab.research.google.com/drive/1kO3pe9N4gASzcNRf22jKwWT2dJ5pzpYR?usp=sharing)
+- **Flux1 Diffusion Model:** [Open Notebook](https://colab.research.google.com/drive/1ae_vu7qlX45QzrO4LvsDKWBJAZK3ei3V?usp=sharing)
+
+In each notebook:
+1. Follow the instructions for setting up the model.
+2. Authenticate with Huggingface if required.
+3. Run the cells to generate the images based on different prompts.
+
+### 2. **Running Locally on Jupyter**
+
+If you prefer to run the notebooks locally on your machine using Jupyter, follow these steps:
+
+1. Open a terminal and navigate to the project directory.
+
+2. Install Jupyter if you haven't already:
+
+```bash
+pip install jupyter
+```
+
+Once Jupyter is installed, launch it by running:
+
+```bash
+jupyter notebook
+```
+
+This will open a new tab in your web browser with the Jupyter Notebook interface.
+
+### 2. **Open the Desired Notebook**
+
+Navigate through the Jupyter interface to find the desired `.ipynb` file and open it.
+
+### 3. **Run the Notebook Cells Sequentially**
+
+After opening the notebook, you can run each cell sequentially by clicking on the cell and pressing **Shift + Enter**.
+
+
+## **Known Issues and Limitations**
+
+1. **Performance:** The performance of the models may vary depending on your hardware. For optimal results, we recommend using a machine with a GPU. CPU-only usage may be slower, especially with larger models like Stable Diffusion XL.
+   
+2. **Huggingface API Token:** Some models require Huggingface authentication. Ensure you have a valid Huggingface API key and that you're within your usage limits.
+
+3. **Model Size:** Some models, like DeepFloyd IF, require more GPU memory for generating higher-quality images. Ensure your hardware meets the model requirements for smooth operation.
+
+---
+
+## **Analysis of Generated Images**
+
+The generated images are analyzed based on the similarity between the text prompts and the images using CLIP (ViT-B/32). We also generate VQA-style questions to evaluate the model's responses to structured prompts, which allows for a deeper understanding of how each model handles the text-to-image generation process. The class distributions of predictions from each model are visualized to detect any inherent biases.
+
+---
+
+## **Contributors**
+
+- **Ani Aloyan** 
+- **Meri Asatryan** 
+- **Seda Bayadyan** 
+
+
+---
