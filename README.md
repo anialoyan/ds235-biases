@@ -1,7 +1,11 @@
+
+
 # **Bias Exploration in Diffusion-Based Image Generation**
 
 This project investigates how different text-to-image diffusion models respond to prompts that may reflect social, demographic, or cultural biases. We generate images using three distinct models and analyze the resulting content using CLIP-based similarity scoring, Visual Question Answering (VQA) models, and manually constructed bias proposals. The goal of this project is to explore and analyze the potential biases within generative models that create images from text.
 
+## **Github repository link**
+[ds235-biases](https://github.com/anialoyan/ds235-biases)
 ---
 
 ## **Project Overview**
